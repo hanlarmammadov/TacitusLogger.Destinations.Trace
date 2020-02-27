@@ -16,7 +16,7 @@ The NuGet <a href="http://example.com/" target="_blank">package</a>:
 PM> Install-Package TacitusLogger.Destinations.Trace
 ```
 
-### Examples
+## Examples
 
 #### Adding trace destination with default parameters
 Using builders:
@@ -32,13 +32,14 @@ TraceDestination traceDestination = new TraceDestination();
 Logger logger = new Logger();
 logger.AddLogDestinations(traceDestination);
 ```
-
+---
 #### Trace destination with simple template log serializer
 Using builders:
 ```cs
+string template = "[$LogDate]-[$LogType]-[$Description]-[From: $Context]-[Src: $Source]-[Id: $LogId]";
 ILogger logger = LoggerBuilder.Logger()
                               .ForAllLogs()
-                              .Trace().WithSimpleTemplateLogText("[$LogDate]-[$LogType]-[$Description]-[From: $Context]-[Src: $Source]-[Id: $LogId]")
+                              .Trace().WithSimpleTemplateLogText(template)
                                       .Add()
                               .BuildLogger();
 ```
@@ -49,7 +50,7 @@ TraceDestination traceDestination = new TraceDestination(template);
 Logger logger = new Logger();
 logger.NewLogGroup(x => true).AddDestinations(traceDestination);
 ```
-
+---
 #### Trace destination with custom log serializer
  Using builders:
  ```cs
